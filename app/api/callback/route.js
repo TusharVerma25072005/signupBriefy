@@ -7,6 +7,10 @@ export async function GET(request) {
     return new Response("No code provided", { status: 400 });
   }
 
+  console.log(process.env.GOOGLE_CLIENT_ID);
+  console.log(process.env.GOOGLE_CLIENT_SECRET);
+    console.log(process.env.GOOGLE_REDIRECT_URI);
+
   const oauth2Client = new google.auth.OAuth2({
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,

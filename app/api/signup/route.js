@@ -17,8 +17,9 @@ export async function POST(request){
     console.log("Password:", password);
 
     await connectToDatabase();
-
+    console.log("Connected to database");
     const existingUser = await User.findOne({ email })
+    console.log("Existing User:", existingUser);
     if(existingUser) {
         return new Response(JSON.stringify({ message: "User already exists" }), {
             status: 409,
@@ -27,11 +28,14 @@ export async function POST(request){
     }
 
     const newUser = new User({ email, password });
+    console.log("New User:", newUser);
     await newUser.save()
+    
+
 
     console.log("User created:", newUser);
 
-    
+
 
     
     return new Response(JSON.stringify({ message: "User signed up successfully" }), {

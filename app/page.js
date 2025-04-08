@@ -23,7 +23,7 @@ export default function Home() {
       const params = new URLSearchParams(
         {
           client_id: "372336145739-77bjeccr2k09o29mivm13bbhfc0epoiv.apps.googleusercontent.com",
-          redirect_uri: "",
+          redirect_uri: "https://signup-briefy.vercel.app/api/callback",
           response_type: "code",
           scope: "https://www.googleapis.com/auth/gmail.readonly email profile",
           access_type: "offline",

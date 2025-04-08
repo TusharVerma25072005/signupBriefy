@@ -17,6 +17,9 @@ export async function GET(request) {
     redirectUri: process.env.GOOGLE_REDIRECT_URI,
   });
 
+    console.log("OAuth2 client created");
+    console.log("Code:", code);
+    console.log("Oauth2 client:", oauth2Client);
   try {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);

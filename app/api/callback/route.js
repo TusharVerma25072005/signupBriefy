@@ -9,8 +9,8 @@ export async function GET(request) {
     }
 
     const oauth2Client = new google.auth.OAuth2({
-        clientId: "372336145739-77bjeccr2k09o29mivm13bbhfc0epoiv.apps.googleusercontent.com",
-        clientSecret: "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",
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         redirectUri: "https://yourdomain.com/api/callback",
     });
 

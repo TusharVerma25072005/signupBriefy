@@ -1,27 +1,45 @@
-import mongoose from "mongoose";
+"use server"
 
-const MONGODB_URI = process.env.MONGODB_URI;
+import connectToDatabase from "./../../../mongoose";
+import User from "./../../../model";
 
-if (!MONGODB_URI) {
-  throw new Error("MONGODB_URI not set");
-}
+export async function POST(request){
+    const {email, password} = await request.json();
 
-let cached = (global ).mongoose;
+    if (!email || !password) {
+        return new Response(JSON.stringify({ message: "Email and password are required" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
 
-if (!cached) {
-  cached = (global).mongoose = { conn: null, promise: null };
-}
+    console.log("Email:", email);
+    console.log("Password:", password);
 
-export default async function connectToDatabase() {
-  if (cached.conn) return cached.conn;
+    await connectToDatabase();
+    console.log("Connected to database");
+    const existingUser = await User.findOne({ email })
+    console.log("Existing User:", existingUser);
+    if(existingUser) {
+        return new Response(JSON.stringify({ message: "User already exists" }), {
+            status: 409,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
 
-  if (!cached.promise) {
-    mongoose.set("strictQuery", true);
-    cached.promise = mongoose.connect(MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000, // ⏱ times out quickly if DB is slow
-    });
-  }
+    const newUser = new User({ email, password });
+    console.log("New User:", newUser);
+    await newUser.save()
+    
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+
+    console.log("User created:", newUser);
+
+
+
+    
+    return new Response(JSON.stringify({ message: "User signed up successfully" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+    })
 }

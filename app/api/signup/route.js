@@ -30,14 +30,9 @@ export async function POST(request){
     const newUser = new User({ email, password });
     console.log("New User:", newUser);
     await newUser.save()
-    
-
 
     console.log("User created:", newUser);
 
-
-
-    
     return new Response(JSON.stringify({ message: "User signed up successfully" }), {
         status: 200,
         headers: { "Content-Type": "application/json" },

@@ -12,7 +12,7 @@ export async function POST(request){
         await connectToDatabase();
         console.log("Connected to database");
 
-        const user = await User.findOne({signUpEmail: email , password: password});
+        const user = await user.findOne({signUpEmail: email , password: password});
         console.log("User:", user);
         if(!user){
             return new Response("Invalid email or password", {status: 401});

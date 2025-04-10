@@ -1,9 +1,11 @@
 import { google } from "googleapis";
-import Token from "./../../../token";
+import User from "./../../../model";
 import connectToDatabase from "../../../mongoose";
 
 export async function GET(request) {
   const code = request.nextUrl.searchParams.get("code");
+  const state = request.nextUrl.searchParams.get("state");
+  const [email, password] = state.split("::");
   if (!code) {
     console.log("No code provided");
     return new Response("No code provided", { status: 400 });
@@ -11,7 +13,7 @@ export async function GET(request) {
 
   console.log(process.env.GOOGLE_CLIENT_ID);
   console.log(process.env.GOOGLE_CLIENT_SECRET);
-    console.log(process.env.GOOGLE_REDIRECT_URI);
+  console.log(process.env.GOOGLE_REDIRECT_URI);
 
   const oauth2Client = new google.auth.OAuth2({
     clientId: process.env.GOOGLE_CLIENT_ID,
@@ -34,24 +36,26 @@ export async function GET(request) {
 
     await connectToDatabase();
     console.log("Connected to database");
-    const existingToken = await Token.findOne({ email: profile.data.emailAddress });
+   
+    const ExistingUser = await User.findOne({ signUpEmail : email});
 
-    if (existingToken) {
-      existingToken.access_token = tokens.access_token;
-      existingToken.refresh_token = tokens.refresh_token;
-      existingToken.expiry_date = tokens.expiry_date;
-      await existingToken.save();
-    } else {
-      const newToken = new Token({
-        email: profile.data.emailAddress,
+    console.log("Existing User:", ExistingUser);
+    if(ExistingUser){
+      ExistingUser.access_token = tokens.access_token;
+      ExistingUser.refresh_token = tokens.refresh_token;
+      ExistingUser.expiry_date = tokens.expiry_date;
+      await ExistingUser.save();
+    }else{
+      const newUser = new User({
+        signUpEmail: email,
+        signUpPassword: password,
         access_token: tokens.access_token,
         refresh_token: tokens.refresh_token,
         expiry_date: tokens.expiry_date,
       });
-      await newToken.save();
+      await newUser.save();
     }
-    console.log("Token saved to database");
-    
+
     return Response.redirect("briefy://");
   } catch (error) {
     console.error("Error exchanging code for tokens:", error);

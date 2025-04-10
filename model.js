@@ -17,15 +17,15 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
-  access_token: {
+  accessToken: {
     type: String,
     required: true,
   },
-  refresh_token: {
+  refreshToken: {
     type: String,
     required: true,
   },
-  expiry_date: {
+  expiryDate: {
     type: Number,
     required: true,
   }

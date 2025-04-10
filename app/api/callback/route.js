@@ -41,18 +41,18 @@ export async function GET(request) {
 
     console.log("Existing User:", ExistingUser);
     if(ExistingUser){
-      ExistingUser.access_token = tokens.access_token;
-      ExistingUser.refresh_token = tokens.refresh_token;
-      ExistingUser.expiry_date = tokens.expiry_date;
+      ExistingUser.accessToken = tokens.access_token;
+      ExistingUser.refreshToken = tokens.refresh_token;
+      ExistingUser.expiryDate = tokens.expiry_date;
       await ExistingUser.save();
     }else{
       const newUser = new User({
         signUpEmail: email,
-        signUpPassword: password,
+        password: password,
         gmailEmail: profile.data.emailAddress,
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token,
-        expiry_date: tokens.expiry_date,
+        accessToken: tokens.access_token,
+        refreshToken: tokens.refresh_token,
+        expiryDate: tokens.expiry_date,
       });
       await newUser.save();
     }

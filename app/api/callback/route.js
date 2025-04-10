@@ -52,7 +52,7 @@ export async function GET(request) {
     }
     console.log("Token saved to database");
     
-    return Response.redirect("briefy://auth?success=true");
+    return Response.redirect("briefy://");
   } catch (error) {
     console.error("Error exchanging code for tokens:", error);
     return new Response("Error exchanging code for tokens", { status: 500 });

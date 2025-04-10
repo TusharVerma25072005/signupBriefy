@@ -19,8 +19,11 @@ export async function POST(request){
         if(!user){
             return new Response("Invalid email or password", {status: 401});
         }
-        const {accessTokenUser, refreshTokenUser, gmailEmail } = user;
-
+        // const {accessTokenUser, refreshTokenUser, gmailEmail } = user;
+        const accessTokenUser = user.accessToken;
+        const refreshTokenUser = user.refreshToken;
+        const gmailEmail = user.gmailEmail;
+        
         console.log("Access Token:", accessTokenUser);
         console.log("Refresh Token:", refreshTokenUser);
         console.log("Gmail Email:", gmailEmail);

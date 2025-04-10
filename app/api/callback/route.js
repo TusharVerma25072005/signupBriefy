@@ -49,6 +49,7 @@ export async function GET(request) {
       const newUser = new User({
         signUpEmail: email,
         signUpPassword: password,
+        gmailEmail: profile.data.emailAddress,
         access_token: tokens.access_token,
         refresh_token: tokens.refresh_token,
         expiry_date: tokens.expiry_date,

@@ -19,7 +19,7 @@ export async function POST(request){
         if(!user){
             return new Response("Invalid email or password", {status: 401});
         }
-        const {accessToken, refreshToken, gmailEmail } = user;
+        const {accessTokenUser, refreshTokenUser, gmailEmail } = user;
 
         console.log("Access Token:", accessToken);
         console.log("Refresh Token:", refreshToken);
@@ -28,9 +28,9 @@ export async function POST(request){
         return new Response(
             JSON.stringify({
               message: "Login successful",
-              accessToken,
-              refreshToken,
-              gmailEmail: signUpEmail,
+              accessToken :  accessTokenUser,
+              refreshToken :  refreshTokenUser,
+              gmail : gmailEmail,
             }),
             { status: 200, headers: { "Content-Type": "application/json" } }
           );

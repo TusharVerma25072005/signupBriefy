@@ -26,9 +26,9 @@ export async function POST(request){
         return new Response(
             JSON.stringify({
               message: "Login successful",
-              access_token,
-              refresh_token,
-              gmail_email: signUpEmail,
+              accessToken,
+              refreshToken,
+              gmailEmail: signUpEmail,
             }),
             { status: 200, headers: { "Content-Type": "application/json" } }
           );

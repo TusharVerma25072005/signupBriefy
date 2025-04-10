@@ -21,8 +21,8 @@ export async function POST(request){
         }
         const {accessTokenUser, refreshTokenUser, gmailEmail } = user;
 
-        console.log("Access Token:", accessToken);
-        console.log("Refresh Token:", refreshToken);
+        console.log("Access Token:", accessTokenUser);
+        console.log("Refresh Token:", refreshTokenUser);
         console.log("Gmail Email:", gmailEmail);
 
         return new Response(

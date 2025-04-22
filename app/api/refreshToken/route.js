@@ -25,7 +25,7 @@ export async function POST(req) {
     const oAuth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
-      'postmessage' 
+        process.env.GOOGLE_REDIRECT_URI
     );
 
     oAuth2Client.setCredentials({

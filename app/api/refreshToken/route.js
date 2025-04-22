@@ -2,7 +2,7 @@ import connectToDatabase from "../../../mongoose";
 import User from "../../../model";
 import { google } from 'googleapis';
 
-export async function GET(req) {
+export async function POST(req) {
   try {
     const { searchParams } = new URL(req.url);
     const email = searchParams.get("email");

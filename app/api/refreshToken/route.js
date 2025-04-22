@@ -4,6 +4,7 @@ import { google } from 'googleapis';
 
 export async function POST(req) {
   try {
+    console.log("Reached refresh token route");
     const { searchParams } = new URL(req.url);
     const email = searchParams.get("email");
 

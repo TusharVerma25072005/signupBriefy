@@ -5,7 +5,8 @@ import { google } from 'googleapis';
 export async function POST(req) {
   try {
     console.log("Reached refresh token route");
-    const { email } = req.body;
+    const body = await req.json();
+    const { email } = body;
     console.log("Email:", email);
     console.log("Request body:", req.body);
     if (!email) {

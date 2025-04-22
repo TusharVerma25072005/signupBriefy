@@ -5,9 +5,7 @@ import { google } from 'googleapis';
 export async function POST(req) {
   try {
     console.log("Reached refresh token route");
-    const { searchParams } = new URL(req.url);
-    const email = searchParams.get("email");
-
+    const { email } = req.body;
     if (!email) {
       return new Response(JSON.stringify({ accessToken: null, error: "Email is required" }), {
         status: 400,

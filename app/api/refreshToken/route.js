@@ -6,6 +6,8 @@ export async function POST(req) {
   try {
     console.log("Reached refresh token route");
     const { email } = req.body;
+    console.log("Email:", email);
+    console.log("Request body:", req.body);
     if (!email) {
       return new Response(JSON.stringify({ accessToken: null, error: "Email is required" }), {
         status: 400,

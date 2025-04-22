@@ -21,6 +21,8 @@ export async function POST(req) {
         status: 404,
       });
     }
+    console.log("User found:", user);
+    console.log("Refresh Token:", user.refreshToken);
 
     const oAuth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,

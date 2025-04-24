@@ -6,6 +6,7 @@ export async function GET(request) {
   const code = request.nextUrl.searchParams.get("code");
   const state = request.nextUrl.searchParams.get("state");
   const [email, password] = state.split("::");
+  console.log(state);
   if (!code) {
     console.log("No code provided");
     return new Response("No code provided", { status: 400 });

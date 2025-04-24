@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
+    sparse  : true,
   },
   password: {
     type: String,
@@ -16,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
+    sparse  : true,
   },
   accessToken: {
     type: String,

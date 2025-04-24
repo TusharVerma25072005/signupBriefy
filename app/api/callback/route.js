@@ -55,6 +55,7 @@ export async function GET(request) {
         refreshToken: tokens.refresh_token,
         expiryDate: tokens.expiry_date,
       });
+      console.log("New User:", newUser);
       await newUser.save();
     }
 
